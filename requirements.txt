@@ -1,0 +1,6 @@
+flask>=3.0.0
+torch
+torchvision
+pillow>=10.0.0
+numpy
+python-multipart>=0.0.6

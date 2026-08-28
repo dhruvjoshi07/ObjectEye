@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ObjectEye - AI Image Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 ObjectEye</h1>
+            <p>Upload a photo and AI will guess what it is!</p>
+        </header>
+        
+        <main>
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <div class="drop-zone" id="dropZone">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p>Drag and drop your image here</p>
+                    <p class="small">or</p>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                    <button class="btn-browse" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+                </div>
+                
+                <div id="imagePreview" class="image-preview" style="display: none;">
+                    <img id="previewImg" src="" alt="Preview">
+                </div>
+            </div>
+            
+            <!-- Buttons -->
+            <div class="button-group">
+                <button class="btn btn-primary" id="predictBtn" onclick="predictImage()" disabled>
+                    🔍 Guess What It Is
+                </button>
+                <button class="btn btn-secondary" id="top3Btn" onclick="predictTop3()" disabled>
+                    📊 Top 3 Guesses
+                </button>
+                <button class="btn btn-reset" onclick="resetUpload()">🔄 Reset</button>
+            </div>
+            
+            <!-- Loading Spinner -->
+            <div id="loading" class="spinner" style="display: none;"></div>
+            
+            <!-- Results Section -->
+            <div id="results" class="results" style="display: none;">
+                <div class="result-card">
+                    <div class="result-emoji" id="resultEmoji">🎯</div>
+                    <h2 id="resultObject">Loading...</h2>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" id="confidenceFill"></div>
+                    </div>
+                    <p id="confidenceText">Confidence: 0%</p>
+                </div>
+                
+                <div id="top3Results" class="top3-results" style="display: none;">
+                    <h3>Top 3 Predictions</h3>
+                    <div id="top3List"></div>
+                </div>
+            </div>
+            
+            <!-- Error Message -->
+            <div id="errorMsg" class="error" style="display: none;"></div>
+        </main>
+        
+        <footer>
+            <p>ObjectEye © 2024 | Powered by AI</p>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
